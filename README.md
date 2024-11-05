@@ -7,9 +7,7 @@ This project is a **React application** that uses the **Sensors API** to detect 
 **Shake Handling**:
   - The `handleShake` function is defined using `useCallback` to ensure it maintains stable references across renders. This function receives sensor data (x, y, z) from the accelerometer.
   - It calculates the total acceleration using the formula:
-     \[
-     text{totalAcceleration} = sqrt{x^2 + y^2 + z^2}
-     \]
+     totalAcceleration = sqrt(x^2 + y^2 + z^2)
   - If the `totalAcceleration` exceeds the predefined threshold of 15 m/s² and a shake is not currently being processed (indicated by the `shaking` state), the shake count is incremented by 1.
 
 **Debouncing Shake Events**:
