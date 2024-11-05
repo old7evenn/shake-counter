@@ -4,11 +4,17 @@ This project is a **React application** that uses the **Sensors API** to detect 
 
 ## Features
 
-- **Shake Detection**: Uses accelerometer/gyroscope data to detect sudden movements (shakes) exceeding 15 m/s².
-- **Shake Counter**: Displays the total number of shakes.
-- **Reset Counter**: Button to reset the shake count to zero.
-- **Visual Feedback**: Animation to visually indicate each shake event.
-- **Error Handling**: Displays a message if device sensors are unavailable.
+**Shake Handling**:
+  - The `handleShake` function is defined using `useCallback` to ensure it maintains stable references across renders. This function receives sensor data (x, y, z) from the accelerometer.
+  - It calculates the total acceleration using the formula:
+     \[
+     \text{totalAcceleration} = \sqrt{x^2 + y^2 + z^2}
+     \]
+  - If the `totalAcceleration` exceeds the predefined threshold of 15 m/s² and a shake is not currently being processed (indicated by the `shaking` state), the shake count is incremented by 1.
+
+**Debouncing Shake Events**:
+  - To avoid multiple increments for a single shake, the `shaking` state is set to `true` when a shake is detected.
+  - A timeout of 300 milliseconds (defined by `SHAKE_RESET_TIME`) is set to reset the `shaking` state back to `false`. This effectively debounces the shake detection.
 
 ## Live Demo
 
